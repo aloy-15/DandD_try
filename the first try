@@ -1,3 +1,70 @@
 #include <iostream>
-using namespace stds;
-int main()
+using namespace std;
+
+int main() {
+  int hp_player1 = 20;
+  int hp_player_2 = 15;
+  int damage_sword = 3;
+  char answer;
+  int dodge;
+
+  srand((unsigned)time(NULL));
+
+  while((hp_player1 >0) && (hp_player_2>0)){
+  cout<<"do you want to attack using a sword? y/n \n";
+  cin>> answer;
+  // commence action
+    if (answer == 'y') {
+      cout<<"your opponent wil now role a d12"<<endl;
+      // takes a random number between 1 and 12
+      dodge = random()%12+1;
+      cout<<"your opponent roled a "<< dodge<< endl;
+      if (dodge >  10){ /*if the dodge is above 10 then you miss    your attack*/ 
+        cout<<"your opponent has dodged the hit"<< endl;
+      }
+      else if (dodge > 8){
+        cout<<"your opponent did not fully manage to escape your hit"<<endl;
+        hp_player_2 -= (damage_sword/2);
+      }
+      else if (dodge <= 4){
+        cout<< "you hit him and it is a critical"<<endl;
+      hp_player_2 -= (damage_sword*2); 
+      }
+      else{
+        cout<<"you hit your opponent"<<endl;
+        hp_player_2 -= damage_sword;
+      }
+      cout<< "your opponents hp is now "<< hp_player_2<<endl;
+    // now your opponent will attack
+    cout<<"now your opponent will attack \nso roll your dodge."<<endl;
+    dodge = random()%12+1;
+    cout<<"for your dodge you rolled "<< dodge<<endl;
+      if (dodge >  10){ /*if the dodge is above 10 then you miss  your attack*/ 
+        cout<<"you have dodged the hit"<< endl;
+      } 
+      else if (dodge > 8){
+      cout<<"you did not fully manage to escape the hit"<<endl;
+      hp_player1 -= (damage_sword/2);
+      }
+      else if (dodge <= 4){
+        cout<< "you are hit and it is a critical"<<endl;
+        hp_player1 -= (damage_sword*2); 
+      }
+      else{
+        cout<<"you have been hit"<<endl;
+        hp_player1 -= damage_sword;
+      }
+    cout<<"you have "<<hp_player1<<" health left"<<endl;
+
+  }
+
+  }
+  if(hp_player1<= 0){
+    cout<<"you lost try again"<<endl;
+  }
+  else{
+    cout<<"you have won good job"<<endl;
+  }
+
+
+}
