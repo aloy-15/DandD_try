@@ -1,0 +1,23 @@
+player_1 
+  stats
+    health(25)
+    defence 
+    melee
+    range
+    dodge
+  weapons/items
+    sword (1-5 damge + melee modifier)
+    bow (1-3 damage + range modifier)
+    
+Enemy(or player 2)
+	stats
+		health
+		defence
+		melee
+		range
+		dodge
+	weapons/items
+		sword(1-5 + melee modifier)
+		
+    
+ 
