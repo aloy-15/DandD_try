@@ -1,0 +1,103 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int hp_player1 = 30;
+    int hp_opponent_1 = 25;
+    int damage_sword = 2;
+    char answer;
+    int dodge;
+    int d20;
+    int melee_stat_p1 = 3;
+    int melee_stat_op1 = 2;
+    int damage;
+    int ding;
+    srand(time(NULL));
+
+    while ((hp_player1 > 0) && (hp_opponent_1 > 0)) {
+        dodge = random() % 20 + 1;
+        d20 = random() % 20 + 1;
+        cout << "do you want to attack using sword? typ y.\n";
+        cin >> answer;
+        if (answer == 'y'){
+          cout<<"\n for d20 you rolled "<<d20<<"\n and your opponent rolled "<<dodge<<" for dodge\n";
+            switch (d20) {
+            case 20:
+                if (dodge == 20) {
+                    hp_opponent_1 -= (damage_sword + melee_stat_p1);
+                    cout << "you hit your opponent for " << damage_sword + melee_stat_p1 << "\n";
+                }
+                else {
+                    hp_opponent_1 = ((damage_sword + melee_stat_p1) * 2);
+                    cout << "you hit your opponent for " << (damage_sword + melee_stat_p1) * 2 << "\n";
+                }
+                break;
+
+            case 1:
+                hp_player1 -= damage_sword;
+                cout << "you hit yourself for " << damage_sword << "\n";
+
+                break;
+
+            default:
+                if (d20 + melee_stat_p1 > dodge) {
+                    hp_opponent_1 -= damage_sword + melee_stat_p1;
+                    cout << "you hit your opponent for " << damage_sword + melee_stat_p1 << endl;
+                }
+                else {
+                    cout << "you missed your hit or your opponent dodged it.\n";
+                }
+                break;
+            }
+            // opponents turn to attack
+            cout<<"\n";
+            dodge = random() % 20 + 1;
+            d20 = random() % 20 + 1;
+
+            cout<<"for dodge you rolled "<<dodge<<endl;
+            cout<<"your opponent rolled "<<d20<<endl;
+
+            switch (d20){
+              case 20:
+                if (dodge == 20) {
+                hp_player1 -= (damage_sword + melee_stat_op1);
+                cout << "your opponent dealt " << damage_sword + melee_stat_op1 << " damage\n";
+                }
+                else {
+                hp_player1 -= ((damage_sword + melee_stat_op1) * 2);
+                cout << "your opponent made a critical hit and yoi got " << (damage_sword + melee_stat_op1) * 2 << "damage\n";
+                }
+
+              break;
+              
+              case 1:
+                hp_opponent_1 -= damage_sword;
+                cout<<"your opponent hit himself\n";
+
+              break;
+
+              default:
+                if (d20+melee_stat_op1 > dodge){
+                  hp_player1 -= (damage_sword + melee_stat_op1);
+                  cout<<"your opponent dealt "<<damage_sword + melee_stat_op1<<" damage\n";
+                }
+                else{
+                  cout<<"your opponent dodged the hit\n";
+                }
+              break;
+              
+            }
+          }
+          cout << "\nyou have " << hp_player1 << " left.\nYour opponent has " << hp_opponent_1 << " left\n\n";
+        
+    }
+
+    if (hp_player1 <= 0) {
+        cout << "you lost try again" << endl;
+    }
+    else if (hp_opponent_1 <= 0) {
+        cout << "you have won good job" << endl;
+        cout << "you have " << hp_player1 << " hp left \n";
+    }
+}
